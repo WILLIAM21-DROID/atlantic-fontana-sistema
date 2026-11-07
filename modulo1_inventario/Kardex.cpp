@@ -157,10 +157,10 @@ void Registrar_material_nuevo(vector<string> &codigos, vector<string> &nombres, 
 }
 void Listar_materiales(const vector<string> &codigos, const vector<string> &nombres, const vector<string> &unidades,
     const vector<int> &obras_material, const vector<int> &stock, const vector<int> &minimo, const string obras[]){
-    cout<<left<<setw(10)<<"CODIGO"<<setw(30)<<"NOMBRE"<<setw(15)<<"UNIDAD"<<setw(15)<<"OBRA"<<setw(10)<<"STOCK"<<setw(10)<<"MINIMO"<<endl;
+    cout<<left<<setw(10)<<"CODIGO"<<setw(30)<<"NOMBRE"<<setw(15)<<"UNIDAD"<<setw(35)<<"OBRA"<<setw(10)<<"STOCK"<<setw(10)<<"MINIMO"<<endl;
     cout<<"------------------------------------------------------------------------------------"<<endl;
     for(int i = 0; i < (int)codigos.size(); i++){
-        cout<<left<<setw(35)<<codigos[i]<<setw(30)<<nombres[i]<<setw(15)<<unidades[i]<<setw(15)<<obras[obras_material[i]]<<setw(10)<<stock[i]<<setw(10)<<minimo[i]<<endl;
+        cout<<left<<setw(10)<<codigos[i]<<setw(30)<<nombres[i]<<setw(15)<<unidades[i]<<setw(35)<<obras[obras_material[i]]<<setw(10)<<stock[i]<<setw(10)<<minimo[i]<<endl;
     }
 
 }
