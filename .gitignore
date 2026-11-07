@@ -1,0 +1,11 @@
+# Programas compilados
+*.exe
+*.o
+*.obj
+
+# Archivos que crea Visual Studio
+.vs/
+Debug/
+Release/
+x64/
+*.user
