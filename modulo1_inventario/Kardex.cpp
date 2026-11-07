@@ -160,7 +160,7 @@ void Listar_materiales(const vector<string> &codigos, const vector<string> &nomb
     cout<<left<<setw(10)<<"CODIGO"<<setw(30)<<"NOMBRE"<<setw(15)<<"UNIDAD"<<setw(15)<<"OBRA"<<setw(10)<<"STOCK"<<setw(10)<<"MINIMO"<<endl;
     cout<<"------------------------------------------------------------------------------------"<<endl;
     for(int i = 0; i < (int)codigos.size(); i++){
-        cout<<left<<setw(10)<<codigos[i]<<setw(30)<<nombres[i]<<setw(15)<<unidades[i]<<setw(15)<<obras[obras_material[i]]<<setw(10)<<stock[i]<<setw(10)<<minimo[i]<<endl;
+        cout<<left<<setw(35)<<codigos[i]<<setw(30)<<nombres[i]<<setw(15)<<unidades[i]<<setw(15)<<obras[obras_material[i]]<<setw(10)<<stock[i]<<setw(10)<<minimo[i]<<endl;
     }
 
 }
