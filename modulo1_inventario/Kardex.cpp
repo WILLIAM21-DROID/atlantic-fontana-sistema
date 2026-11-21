@@ -349,7 +349,73 @@ void Stock_por_obra(const vector<string> &codigos, const vector<string> &nombres
         cout<<endl;
     }
 }
-
+void Historial_general(const vector<string> &codigos, const vector<string> &nombres,
+    const vector<int> &mov_material, const vector<string> &mov_fecha, const vector<string> &mov_tipo,
+    const vector<string> &mov_detalle, const vector<int> &mov_cantidad, const vector<int> &mov_saldo){
+    int total_entradas = 0;
+    int total_salidas = 0;
+    cout<<"=====HISTORIAL GENERAL DE MOVIMIENTOS====="<<endl;
+    cout<<left<<setw(12)<<"FECHA"<<setw(10)<<"TIPO"<<setw(28)<<"DETALLE"<<setw(10)<<"ENTRADA"<<setw(10)<<"SALIDA"
+        <<setw(10)<<"SALDO"<<setw(10)<<"CODIGO"<<setw(30)<<"MATERIAL"<<endl;
+    cout<<"------------------------------------------------------------------------------------------------------------"<<endl;
+    for(int i = 0; i < (int)mov_material.size(); i++){
+        int pos = mov_material[i];              // posicion del material de esta fila
+        cout<<left<<setw(12)<<mov_fecha[i]<<setw(10)<<mov_tipo[i]<<setw(28)<<mov_detalle[i];
+        if(mov_tipo[i] == "SALIDA"){
+            cout<<setw(10)<<"-"<<setw(10)<<mov_cantidad[i];
+            total_salidas++;
+        }else{
+            cout<<setw(10)<<mov_cantidad[i]<<setw(10)<<"-";
+            if(mov_tipo[i] == "ENTRADA"){       
+                total_entradas++;
+            }
+        }
+        cout<<setw(10)<<mov_saldo[i]<<setw(10)<<codigos[pos]<<setw(30)<<nombres[pos]<<endl;
+    }
+    cout<<"------------------------------------------------------------------------------------------------------------"<<endl;
+    cout<<"Total de movimientos: "<<mov_material.size()<<endl;
+    cout<<"Entradas registradas: "<<total_entradas<<endl;
+    cout<<"Salidas registradas: "<<total_salidas<<endl;
+}
+void Resumen_del_inventario(const vector<string> &codigos, const vector<string> &nombres, const vector<string> &unidades,
+    const vector<int> &stock, const vector<int> &minimo, const vector<string> &mov_tipo){
+    int en_alerta = 0;
+    int sin_stock = 0;
+    int pos_mayor = 0;                          
+    for(int i = 0; i < (int)codigos.size(); i++){
+        if(stock[i] < minimo[i]){
+            en_alerta++;
+        }
+        if(stock[i] == 0){
+            sin_stock++;
+        }
+        if(stock[i] > stock[pos_mayor]){
+            pos_mayor = i;                      
+        }
+    }
+    int entradas = 0;
+    int salidas = 0;
+    for(int i = 0; i < (int)mov_tipo.size(); i++){
+        if(mov_tipo[i] == "ENTRADA"){
+            entradas++;
+        }else if(mov_tipo[i] == "SALIDA"){
+            salidas++;
+        }
+    }
+    cout<<"=====RESUMEN DEL INVENTARIO====="<<endl;
+    cout<<"Materiales registrados: "<<codigos.size()<<endl;
+    cout<<"Materiales en alerta (bajo el minimo): "<<en_alerta<<endl;
+    cout<<"Materiales sin stock: "<<sin_stock<<endl;
+    if(codigos.size() > 0){
+        cout<<"Material con mayor stock: "<<codigos[pos_mayor]<<" - "<<nombres[pos_mayor]
+            <<" ("<<stock[pos_mayor]<<" "<<unidades[pos_mayor]<<")"<<endl;
+    }
+    cout<<"Entradas registradas: "<<entradas<<endl;
+    cout<<"Salidas registradas: "<<salidas<<endl;
+    if(en_alerta > 0){
+        cout<<"Revise la opcion 7 para ver los materiales en alerta."<<endl;
+    }
+}
 int main(){
     string obras[4] = {"Obra de pavimentacion", "Obra de construccion de edificio", "Obra de carretera", "Obra de remodelacion"};
     vector<string> codigos, nombres, unidades;
@@ -375,7 +441,9 @@ int main(){
     cout<<"7. Ver alertas de stock minimo"<<endl;
     cout<<"8. Modificar stock minimo"<<endl;
     cout<<"9. Stock por obra"<<endl;
-    cout<<"10. Salir"<<endl;
+    cout<<"10. Historial general de movimientos"<<endl;
+    cout<<"11. Resumen del inventario"<<endl;
+    cout<<"12. Salir"<<endl;
     Numero_opcion_menu = Leer_entero("=====Ingrese el numero de la opcion que desea realizar: ");
 
     switch(Numero_opcion_menu){
@@ -420,12 +488,21 @@ int main(){
             Stock_por_obra(codigos, nombres, unidades, obras_material, stock, obras);
             break;
         case 10:
+            cout<<"Historial de movimientos"<<endl;    
+             Historial_general(codigos, nombres,
+                mov_material, mov_fecha, mov_tipo, mov_detalle, mov_cantidad, mov_saldo);
+            break;
+        case 11:
+            cout<<"Resumen del inventario"<<endl;
+            Resumen_del_inventario(codigos, nombres, unidades, stock, minimo, mov_tipo);
+            break;
+        case 12:
             cout<<"Saliendo del sistema ..."<<endl;
             break;
         default:
             cout<<"Opcion invalida, por favor intente de nuevo."<<endl;
             break;
     }
-    }while(Numero_opcion_menu != 10 );
+    }while(Numero_opcion_menu != 12 );
     return 0;
 }
