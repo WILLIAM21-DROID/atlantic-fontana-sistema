@@ -470,7 +470,7 @@ void mostrarReporte() {
 
 //  programa principal
 
-int main() {
+void moduloCompras() {
     
     cout << fixed << setprecision(2);
 
@@ -487,7 +487,7 @@ int main() {
         cout << "7. Atender requerimiento (crear orden)" << endl;
         cout << "8. Buscar proveedor" << endl;
         cout << "9. Reporte de compras" << endl;
-        cout << "0. Salir" << endl;
+        cout << "0. Volver al menu principal" << endl;
         cout << "Opcion: ";
         cin >> opcion;
 
@@ -526,5 +526,5 @@ int main() {
         }
     }
 
-    return 0;
+    
 }
