@@ -416,19 +416,22 @@ void Resumen_del_inventario(const vector<string> &codigos, const vector<string> 
         cout<<"Revise la opcion 7 para ver los materiales en alerta."<<endl;
     }
 }
-int main(){
-    string obras[4] = {"Obra de pavimentacion", "Obra de construccion de edificio", "Obra de carretera", "Obra de remodelacion"};
-    vector<string> codigos, nombres, unidades;
-    vector<int> obras_material, stock, minimo;
-    // Vectores del kardex: un elemento por cada movimiento
-    vector<int> mov_material, mov_cantidad, mov_saldo;
-    vector<string> mov_fecha, mov_tipo, mov_detalle;
+void moduloInventario(){
+    static string obras[4] = {"Obra de pavimentacion", "Obra de construccion de edificio", "Obra de carretera", "Obra de remodelacion"};
+    static vector<string> codigos, nombres, unidades;
+    static vector<int> obras_material, stock, minimo;
+    static vector<int> mov_material, mov_cantidad, mov_saldo;
+    static vector<string> mov_fecha, mov_tipo, mov_detalle;
+    static bool datos_cargados = false;
     int Numero_opcion_menu;
-    Cargar_datos_iniciales(codigos, nombres, unidades, obras_material, stock, minimo);
-    // El stock de los materiales precargados entra al kardex como saldo inicial
-    for(int i = 0; i < (int)codigos.size(); i++){
-        Registrar_movimiento(mov_material, mov_fecha, mov_tipo, mov_detalle, mov_cantidad, mov_saldo,
-            i, "01/11/2026", "INICIAL", "Saldo inicial", stock[i], stock[i]);
+
+    if(!datos_cargados){
+        Cargar_datos_iniciales(codigos, nombres, unidades, obras_material, stock, minimo);
+        for(int i = 0; i < (int)codigos.size(); i++){
+            Registrar_movimiento(mov_material, mov_fecha, mov_tipo, mov_detalle, mov_cantidad, mov_saldo,
+                i, "01/11/2026", "INICIAL", "Saldo inicial", stock[i], stock[i]);
+        }
+        datos_cargados = true;
     }
     do{
     cout<<endl<<"=====ATLANTIC FONTANA -INVENTARIO Y ALMACENAMIENTO====="<<endl;
@@ -497,12 +500,11 @@ int main(){
             Resumen_del_inventario(codigos, nombres, unidades, stock, minimo, mov_tipo);
             break;
         case 12:
-            cout<<"Saliendo del sistema ..."<<endl;
+            cout<<"Volviendo al menu..."<<endl;
             break;
         default:
             cout<<"Opcion invalida, por favor intente de nuevo."<<endl;
             break;
     }
     }while(Numero_opcion_menu != 12 );
-    return 0;
 }
