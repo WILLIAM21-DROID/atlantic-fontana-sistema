@@ -1,19 +1,3 @@
-/**
- * ==============================================================================
- * PROYECTO: Sistema de Gestion y Control de Obra - Atlantic Fontana Constructora
- * MODULO: Control de Obra (Modulo 3)
- * LENGUAJE: C++ (Estandard C++17)
- * UNIVERSIDAD: USIL - Fundamentos de Programacion
- * 
- * DESCRIPCION:
- *   Este programa permite a la constructora Atlantic Fontana realizar la 
- *   gestion completa del Control de Obra, abordando el seguimiento de 
- *   presupuestos, gastos ejecutados, avances fisicos de partidas, calculos
- *   de porcentaje de consumo financiero y deteccion automatizada de alertas 
- *   de sobrecostos para evitar faltantes y perdidas financieras en proyectos.
- * ==============================================================================
- */
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -53,10 +37,10 @@ struct PartidaObra {
     string nombreObra;
     string ubicacion;
     string ingenieroResponsable;
-    string tipoPartida; // Cimentacion, Estructura, Acabados, Vialidad
+    string tipoPartida;
     double presupuestoAsignado;
     double gastoEjecutado;
-    double avanceFisicoReal; // Porcentaje de 0 a 100
+    double avanceFisicoReal; 
     string fechaCreacion;
     string fechaUltimaModificacion;
     vector<RegistroHistorial> historial;
