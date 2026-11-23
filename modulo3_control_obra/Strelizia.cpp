@@ -584,12 +584,10 @@ public:
 };
 
 // ==============================================================================
-// FUNCION PRINCIPAL (MAIN)
+// FUNCION PRINCIPAL
 // ==============================================================================
-int main() {
+void moduloControlObra() {
     cout << fixed << setprecision(2);
-
-    MenuModuloControlObra interfaz;
+    static MenuModuloControlObra interfaz;   // static para no perder las partidas
     interfaz.desplegarMenu();
-
-    return 0;
+}
